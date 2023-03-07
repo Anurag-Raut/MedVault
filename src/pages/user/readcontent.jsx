@@ -102,7 +102,7 @@ else{
         <div style={{color:'black',display:'flex',width:'100%'}}>
             <Bar member={member} activeStep={activeStep} setActiveStep={setActiveStep} />
 
-            <div style={{backgroundColor:'wheat',display:'flex',flex:1}} >
+            <div style={{backgroundColor:'white',display:'flex',flex:1}} >
 
         {
             activeStep===0?

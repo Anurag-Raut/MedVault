@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
 import "./form.css";
-const bg=['A +','A -','B+','B -','AB +','AB -','O +','O -'];
+const bg=['A+','A-','B+','B-','AB+','AB-','O+','O-'];
 function BasicInfo({publicdata,setpublicdata,member}) {
     const [bgIndex,setBgIndex]=useState(0);
     console.log(publicdata);
@@ -18,7 +18,7 @@ function BasicInfo({publicdata,setpublicdata,member}) {
       }}
     >
       <div>
-        <h2 class="label">Name</h2>
+        <h2 class="label" >Name</h2>
         <TextField
           inputProps={{
             style: {

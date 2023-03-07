@@ -2,6 +2,8 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useRef, useState } from "react";
+
+
 const dis = [
     "Cancer",
     "dsv",
@@ -17,7 +19,6 @@ const dis = [
 function FamMedHistory(){
     const dummy=useRef();
     const [pastData,setpastData]=useState([])
-
     return (
         <div
         style={{

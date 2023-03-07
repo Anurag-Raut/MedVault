@@ -14,7 +14,7 @@ function Sidebar(){
     console.log(user);
     return (
 
-        <motion.div  onHoverEnd={()=>{setshow(0);}} onHoverStart={()=>{setshow(1)}} whileHover={{width:'14%'}} style={{height:'100vh' ,width:'4vw',backgroundColor:'#0ad0b2',flexDirection:'column',display:'flex',justifyContent:"space-between"}}>
+        <motion.div  onHoverEnd={()=>{setshow(0);}} onHoverStart={()=>{setshow(1)}} whileHover={{width:'17%'}} style={{height:'100vh' ,width:'4vw',backgroundColor:'#0ad0b2',flexDirection:'column',display:'flex',justifyContent:"space-between"}}>
                 <div class="profile d-flex" style={{height:'50px'}}>
                     {
                         show?

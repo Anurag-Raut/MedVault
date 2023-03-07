@@ -12,7 +12,7 @@ export const StateContextProvider = ({ children }) => {
  
     const address = useAddress();
     const connect = useMetamask();
-    const { contract } = useContract('0x587586E033AC8Bc057D3f3B6814943D8a74DB2aa');
+    const { contract } = useContract('0x31Be51226A0c2f8b34D7c24AEF6B622FEE8E2B99');
     const { mutateAsync: addPatient } = useContractWrite(contract, 'addPatient');
 
     const { mutateAsync: delPatient } = useContractWrite(contract, 'delPatient');

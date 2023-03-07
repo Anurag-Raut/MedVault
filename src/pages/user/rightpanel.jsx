@@ -2,7 +2,7 @@ import { defaultAbiCoder } from "ethers/lib/utils";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../context/ind";
-function RightPanel({uid,update,setmuid}){
+function RightPanel({uid,update,setmuid,parray,setparray}){
     const {
         addPatient,
         getAllPatients,
@@ -11,7 +11,7 @@ function RightPanel({uid,update,setmuid}){
         getMembers,
         getPublicInfo
       } = useStateContext();
-    const [parray, setparray] = useState([]);
+   
     const [memberids, setmemberids] = useState([]);
     const { connect, address } = useStateContext();
     const handleGetMemebers = async () => {

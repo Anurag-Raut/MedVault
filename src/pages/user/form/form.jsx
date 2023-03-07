@@ -7,6 +7,7 @@ import FamMedHistory from "./Family-past-history";
 import FormBar from "./form-bar";
 import PastMedInfo from "./past-medical-info";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Web3Storage } from 'web3.storage'
 import './form.css';
 import {
   getAuth,
@@ -36,8 +37,8 @@ async function getdoc(docRef) {
     const docSnap = await getDoc(docRef);
     return docSnap;
   }
-function Form({member,setupdate,update}){
-
+function Form({member,setupdate,update,setisread}){
+    const client = new Web3Storage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY2MmMzMzA3OTkxRmM0Nzg0NzNmMmMwMDFmNzBCMGFFQTE2ZjM0NzEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzczNDIxNDI0NTAsIm5hbWUiOiJzdG9yZTIifQ.K2OCaGVt86PlyD7Tyq71NMCrxwuxK9xmflbYNe0_cIo" })
     const {
         addPatient,
         getAllPatients,
@@ -123,6 +124,11 @@ async function setdoc(id, uid) {
 
     const handleAddUser = async (e) => {
         e?.preventDefault();
+        console.log(publicdata.profile);
+        const rootCid = await client.put(publicdata.profile);
+         const imageURL =
+      "https://" + rootCid + ".ipfs.w3s.link/" + publicdata.profile[0].name;
+      console.log(imageURL);
     
         // await setDoc(doc(database, "users", uuid), {
         //   id
@@ -138,9 +144,12 @@ async function setdoc(id, uid) {
           alert("data already exist");
           return;
         }
+        var tempPdata=publicdata;
+        tempPdata.profile=imageURL;
+
         // const fileInput = data.imageURL;
         // console.log(fileInput.name)
-        // const rootCid = await client.put(fileInput.files);
+        
         
         // setdata(t);
         console.log(publicdata)
@@ -149,11 +158,12 @@ async function setdoc(id, uid) {
        
           
         
-        await addPatient(publicdata,privatedata, 'c', uid, uid).then(async()=>{
+        await addPatient(tempPdata,privatedata, 'c', uid, uid).then(async()=>{
           await updateDoc(doc(database, "users", user?.sub?.substring(14)), {
             name: publicdata.name,
           }).then(()=>{
-            setupdate(!update)
+            setupdate(!update);
+            setisread(0);
           }
     
           )
@@ -165,7 +175,13 @@ async function setdoc(id, uid) {
 
         <div style={{height:'90vh',width:'100%',color:"black",marginLeft:'3vw'}}>
             <div style={{height:'10vh',display:'flex',alignItems:'center'}}>
-            <h1 style={{fontSize:'3.5vw'}}>Your Medical Form</h1>
+                {
+                    member?
+                    <h1 style={{fontSize:'3.5vw'}}> Add Member Details</h1>
+                    :
+                    <h1 style={{fontSize:'3.5vw'}}> Add Your Details</h1>
+                }
+           
 
             </div>
             <div style={{display:'flex',backgroundColor:'white',width:'90vh'}}>

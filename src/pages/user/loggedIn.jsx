@@ -24,7 +24,8 @@ import {
   where,
 } from "firebase/firestore";
 import Navbar from "./navbar.jsx";
-import { Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
+import Form from "./form/form.jsx";
 import Delete from "./delete.jsx";
 import ReadContent from "./readcontent.jsx";
 import WriteContent from "./writecontent.jsx";
@@ -32,6 +33,8 @@ import { v4 as uuidv4 } from "uuid";
 import RightPanel from "./rightpanel.jsx";
 import Sidebar from "./sidebar.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useStateContext } from "../../context/ind.jsx";
+
 
 async function getdoc(docRef) {
   const docSnap = await getDoc(docRef);
@@ -39,8 +42,9 @@ async function getdoc(docRef) {
 }
 
 function LoggedInUser({}) {
- 
+  const { addPatient,getAllPatients,contract,getPatient,getPublicInfo } = useStateContext();
   // var uid=uuidv4();
+  const [parray, setparray] = useState([]);
   const { loginWithRedirect, isAuthenticated, user,logout } = useAuth0();
   const [uid, setuuid] = useState("");
   const [update,setupdate]=useState(0);
@@ -61,6 +65,7 @@ function LoggedInUser({}) {
 
   function dr() {
     // console.log(id);
+
     const docRef = doc(database, "users", `${id}`);
     const docf = getdoc(docRef).then(() => {
       // setdocref(docf);
@@ -93,6 +98,42 @@ function LoggedInUser({}) {
       setuuid(df?.data()?.uid);
     });
   }, [user]);
+  const [isread,setisread]=useState(1);
+  
+  const handleFindPublicInfo = async (uid)=>{
+     if(uid){
+
+     }
+     else{
+      return;
+     }
+    const obj=await getPublicInfo(uid);
+    console.log(uid,obj,'hemlu');
+    if(obj===''){
+       
+       
+    }
+    else{
+      setisread(0);
+     
+    }
+    
+    
+
+    
+} 
+useEffect(()=>{
+  console.log(uid);
+  handleFindPublicInfo(uid);
+},[uid])
+useEffect(()=>{
+  console.log(uid);
+  handleFindPublicInfo(uid);
+},[])
+useEffect(()=>{
+  console.log(uid);
+  handleFindPublicInfo(uid);
+},[update])
   //   console.log(id);
 
   //   setdocref(docf);
@@ -133,18 +174,30 @@ function LoggedInUser({}) {
             <Sidebar />
             <div style={{display:'flex',flex:1}}>
               <Routes>
-                <Route path="/" element={<WriteContent member={0} update={update }setupdate={setupdate} />} />
-                <Route path="/addmember" element={<WriteContent member={1} update={update }setupdate={setupdate}/>} />
+                <Route path="" element={
+                isread===1?
+                <Form setisread={setisread} member={0} update={update} setupdate={setupdate} />
+                :
+                <ReadContent />
+
+                
+                } />
+                <Route path="/addmember" element={
+
+<Form member={1} setisread={setisread} update={update} setupdate={setupdate} />
+                }
+                
+                />
                 <Route path="/read" element={<ReadContent />} />
-                <Route path="/delete" element={<Delete  />} />
-                <Route path="/member" element={<ReadContent member={1} muid={muid} />} />
+                <Route path="/delete" element={<Delete setisread={setisread} update={update }setupdate={setupdate} />} />
+                <Route path="/member" element={<ReadContent member={1} parray={parray} setparray={setparray} muid={muid} />} />
               </Routes>
             </div>
             {/* <RightPanel/> */}
            
             
 
-            <RightPanel uid={uid} update={update }setupdate={setupdate} muid={muid} setmuid={setmuid}/>
+            <RightPanel parray={parray} setparray={setparray} uid={uid} update={update }setupdate={setupdate} muid={muid} setmuid={setmuid}/>
             {/* <WriteContent/> */}
           </div>
         )

@@ -17,6 +17,7 @@ function BasicInfo({publicdata,setpublicdata,member}) {
         overflow:'auto'
       }}
     >
+       
       <div>
         <h2 class="label">Name</h2>
         <TextField
@@ -106,7 +107,7 @@ null
       <div>
         <h2 class="label">Upload Your Photo</h2>
         <div class="mb-3">
-          <input class="form-control" type="file" id="formFile" />
+          <input class="form-control" type="file" id="formFile" onChange={(e)=>{var a=publicdata;a.profile=e.target.files;setpublicdata({...a})}} />
         </div>
       </div>
 

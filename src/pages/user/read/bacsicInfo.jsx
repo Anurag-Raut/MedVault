@@ -34,7 +34,7 @@ function Basicinfo({data,member}){
   
   
   }
-  
+         <img style={{width:'90px',height:'90px'}} src={`${data?.profile}`} alt="kat gaya" />
         <div>
           <h2 class="label">Email</h2>
           <h3>{data?.email}</h3>

@@ -15,7 +15,9 @@ import LoggedInUser from "./pages/user/loggedIn";
 import Admin from "./pages/admin/admin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
+  function change(){
+    
+  }
 root.render(
   <Auth0Provider
     domain="dev-petrhms2thok1i1v.us.auth0.com"

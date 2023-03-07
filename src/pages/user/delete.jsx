@@ -11,7 +11,8 @@ async function getdoc(docRef) {
     const docSnap = await getDoc(docRef);
     return docSnap;
   }
-function Delete({member,muid}){
+function Delete({member,muid,update,setupdate,setisread}){
+    
     const {connect,address}=useStateContext();
     const [uid,setuuid]=useState('');
     const { loginWithRedirect ,isAuthenticated,user} = useAuth0();
@@ -49,7 +50,11 @@ function Delete({member,muid}){
         console.log(uid,code)
         const a=await deletePatient(uid,code);
         // console.log(a);
+       
         if(a===1){
+            await deleteDoc(doc(database, "users", `${user?.sub?.substring(14)}`));
+            setupdate(!update);
+            setisread(1);
             alert('Patient Deleted')
         }
         else{

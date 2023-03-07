@@ -7,6 +7,7 @@ import { setDoc ,collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc ,
 import { getPublicInfo } from "../../function/public.js";
 import { useStateContext } from "../../context/ind";
 import { useNavigate } from "react-router-dom";
+import { async } from "@firebase/util";
 function AdminDash({display,setdisplay}){
     const [data,setdata]=useState([]);
     const [uuid,setuuid]=useState('');
@@ -18,6 +19,20 @@ function AdminDash({display,setdisplay}){
         // the item hovered
         console.log(result)
     }
+    const imagefunc = async (uid)=>{
+     
+      const obj=await getPublicInfo(uid);
+     if(obj?.profile){
+      return obj.profile;
+     }
+     else{
+      return '';
+     }
+      // console.log(obj);
+      // setdisplay(obj);
+
+      
+  } 
    
       const handleFindPublicInfo = async (uid)=>{
      
@@ -30,27 +45,47 @@ function AdminDash({display,setdisplay}){
 
         
     } 
+    async function funn (){
+     
+      const q = query(messageref);
+      onSnapshot(q,(data,index) => {
+        let temp = [];
+        let ids = [];
+       
+        data.docs.map(async(item) => {
+          
+          temp.push({ ...item.data() });
+          
+          // console.log(item.data(),'chibedsgbrdsjkgb');
+         
+          
+          //   console.log(dataId)
+        });
+        setdata([...temp]);
+       
+        
+      });
+      const tempurl=await Promise.all(data.map(async(item,i)=>{
+        console.log(item.uid);
+        var a=await imagefunc(item.uid);
+        var temp=data;
+        temp[i].profile=a;
+        setdata(temp);
+        console.log([...a]);
+        return a;
+        // console.log(temp[i],a);
+
+      }))
+      console.log(tempurl,'sadgvarg');
+     
+
+    }
     
       
-   
+   console.log(data);
     useEffect(
         () => {
-          // console.log(chatInd)
-    
-          const q = query(messageref);
-          onSnapshot(q, (data) => {
-            let temp = [];
-            let ids = [];
-            data.docs.map((item) => {
-              temp.push({ ...item.data() });
-              
-              //   console.log(dataId)
-            });
-            setdata(temp);
-            
-          });
-    
-          //   dummy.current.scrollIntoView({ behavior: 'smooth' });
+           funn();
         },
        []
         
@@ -70,10 +105,11 @@ function AdminDash({display,setdisplay}){
       }
       const formatResult = (item) => {
         return (
-          <>
+          <div style={{height:'60px',}} class='d-flex'>
+            <img style={{height:'40px',width:'40px'}} src={`${item?.profile}`} alt="" />
             {/* <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span> */}
-            <span style={{ display: 'block', textAlign: 'left' }}> {item.name}</span>
-          </>
+            <span style={{   }}> {item?.name}</span>
+          </div>
         )
       }
 

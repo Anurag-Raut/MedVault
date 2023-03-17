@@ -124,11 +124,11 @@ async function setdoc(id, uid) {
 
     const handleAddUser = async (e) => {
         e?.preventDefault();
-        console.log(publicdata.profile);
+        // console.log(publicdata.profile);
         const rootCid = await client.put(publicdata.profile);
          const imageURL =
       "https://" + rootCid + ".ipfs.w3s.link/" + publicdata.profile[0].name;
-      console.log(imageURL);
+      // console.log(imageURL);
     
         // await setDoc(doc(database, "users", uuid), {
         //   id
@@ -136,8 +136,10 @@ async function setdoc(id, uid) {
     
         // var name = document.getElementById("name-text").value;
         // var code = document.getElementById("code-text").value;
-        // console.log(name,code,uuid)
+        console.log(uid,'water')
         var a = await check(uid);
+        console.log('done');
+        
         // console.log(a);
         if (a === "") {
         } else {
@@ -184,9 +186,9 @@ async function setdoc(id, uid) {
            
 
             </div>
-            <div style={{display:'flex',backgroundColor:'white',width:'90vh'}}>
+            <div style={{display:'flex',backgroundColor:'white',width:'100%',justifyContent:"space-around",alignItems:'center'}}>
             <FormBar member={member} activeStep={activeStep} setActiveStep={setActiveStep} handleAddUser={handleAddUser} handleAddMember={handleAddMember} />
-            <div>{
+            <div style={{display:'flex',justifyContent:'center'}} >{
                 activeStep===0?
                 <BasicInfo member={member} publicdata={publicdata} setpublicdata={setpublicdata} />
                 :
@@ -213,3 +215,5 @@ async function setdoc(id, uid) {
 
 }
 export default Form;
+
+

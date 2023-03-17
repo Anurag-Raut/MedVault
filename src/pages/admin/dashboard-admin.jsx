@@ -8,6 +8,7 @@ import { getPublicInfo } from "../../function/public.js";
 import { useStateContext } from "../../context/ind";
 import { useNavigate } from "react-router-dom";
 import { async } from "@firebase/util";
+import { motion } from "framer-motion";
 function AdminDash({display,setdisplay}){
     const [data,setdata]=useState([]);
     const [uuid,setuuid]=useState('');
@@ -101,7 +102,7 @@ function AdminDash({display,setdisplay}){
        
       }
       const handleOnFocus = () => {
-        console.log('Focused')
+       
       }
       const formatResult = (item) => {
         return (
@@ -130,27 +131,27 @@ function AdminDash({display,setdisplay}){
       
 
     return (
-    <div>
-       
-
-        <ReactSearchAutocomplete
+    <motion.div >
+       <motion.div    >
+       <ReactSearchAutocomplete
             items={data}
             onSelect={handleOnSelect}
             autoFocus
             formatResult={formatResult}
             fuseOptions={{ keys: ["name"] }}
             onFocus={handleOnFocus}
+            id='hemlu'
             
           />
-          <h1>
-          {display.name}
-        
-          
-          </h1>
+
+       </motion.div>
+
+       
+         
          
          
 
-    </div>);
+    </motion.div>);
 }
 
 export default AdminDash;

@@ -26,7 +26,7 @@ function ContactInfo({privatedata,setprivatedata}){
       style={{
         
         height: "70vh",
-        margin: "10%",
+        // margin: "10%",
         display: "flex",
         justifyContent: "space-around",
         alignItems: "space-around",

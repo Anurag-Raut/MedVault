@@ -12,7 +12,7 @@ export const StateContextProvider = ({ children }) => {
  
     const address = useAddress();
     const connect = useMetamask();
-    const { contract } = useContract('0x31Be51226A0c2f8b34D7c24AEF6B622FEE8E2B99');
+    const { contract } = useContract('0x587586E033AC8Bc057D3f3B6814943D8a74DB2aa');
     const { mutateAsync: addPatient } = useContractWrite(contract, 'addPatient');
 
     const { mutateAsync: delPatient } = useContractWrite(contract, 'delPatient');
@@ -28,7 +28,7 @@ export const StateContextProvider = ({ children }) => {
 
           console.log(publicdata.code,'pleaseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
 
-         
+          console.log(publicdata,privatedata,codee);
          
           // const public_data=data;
           var publicText=JSON.stringify(a)
@@ -70,11 +70,16 @@ export const StateContextProvider = ({ children }) => {
     }
 
     const getPublicInfo = async(uid)=>{
-      const patient = await contract.call('getPatient',uid);
+      console.log('waterrr',uid)
+      const patient = await contract?.call('getPatient',uid);
+      console.log('bottle')
       
-      console.log(patient);
-      if(patient.public_info!==''){
-        var a=JSON.parse(patient.public_info)
+      console.log(patient,'bottle patient');
+      if(!patient){
+        return '';
+      }
+      if(patient?.public_info!==''){
+        var a=JSON.parse(patient?.public_info)
         return a;}
 
       else{

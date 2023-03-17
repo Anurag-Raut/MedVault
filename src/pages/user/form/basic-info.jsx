@@ -11,10 +11,11 @@ function BasicInfo({publicdata,setpublicdata,member}) {
       style={{
 
         height: "70vh",
-        margin: "10%",
-        
+        // margin: "10%",
+        alignItems:'center',
         flexDirection: "column",
         overflow:'auto'
+
       }}
     >
        

@@ -54,7 +54,7 @@ function PastMedInfo({privatedata,setprivatedata,disarr}) {
     class='container'
       style={{
         height: "70vh",
-        margin: "10%",
+        // margin: "10%",
         width: "100%",
         // display: "flex",
         // justifyContent: "space-around",

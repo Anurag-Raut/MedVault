@@ -14,6 +14,7 @@ function RightPanel({uid,update,setmuid,parray,setparray}){
    
     const [memberids, setmemberids] = useState([]);
     const { connect, address } = useStateContext();
+    
     const handleGetMemebers = async () => {
         // var code = document.getElementById("code-text").value;
       
@@ -54,7 +55,7 @@ function RightPanel({uid,update,setmuid,parray,setparray}){
     return (
         <div style={{height:'100vh',width:'15vw',backgroundColor:'black',display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'center'}}>
             <div style={{marginTop:'20px'}}>
-            <button type="button" class="btn btn-primary" onClick={connect}>Connect to Wallet</button>
+            <button type="button" class="btn btn-primary" onClick={()=>{connect();console.log(address,'segef')}}>Connect to Wallet</button>
             </div>
             <div style={{height:'40vh'}} >
                 <h1>

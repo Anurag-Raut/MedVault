@@ -13,6 +13,7 @@ import App from "./App";
 import Select from "./Select";
 import LoggedInUser from "./pages/user/loggedIn";
 import Admin from "./pages/admin/admin";
+import "./main.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
   function change(){

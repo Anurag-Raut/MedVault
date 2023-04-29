@@ -145,6 +145,8 @@ function App() {
                   justifyContent: "space-around",
                 }}
               >
+
+                
                 <motion.div
                   style={{
                     display: "flex",
@@ -178,7 +180,7 @@ function App() {
                     onClick={() => {
                       loginWithRedirect({
                         appState: {
-                          returnTo: "https://meddvault.netlify.app/user",
+                          returnTo: "http://localhost:3000/user",
                         },
                       });
                     }}
@@ -214,7 +216,7 @@ function App() {
                     onClick={() => {
                       loginWithRedirect({
                         appState: {
-                          returnTo: "https://meddvault.netlify.app/admin",
+                          returnTo: "http://localhost:3000/admin",
                         },
                       });
                     }}

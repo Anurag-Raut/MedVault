@@ -10,11 +10,11 @@ function Admin(){
     
     return(
         <div class='d-flex'>
-            {/* <Sidebar/> */}
+            <Sidebar/>
             <div style={{width:'500px'}}>
             <Routes>
         
-        <Route path='' element={<AdminDash display={display} setdisplay={setdisplay} />} />
+        <Route path='dashboard' element={<AdminDash display={display} setdisplay={setdisplay} />} />
         <Route path='userInfo' element={<UserInfo data={display}/>} />
         </Routes>
 
